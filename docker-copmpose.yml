@@ -1,0 +1,37 @@
+name: Ollama_GPU_CPU
+
+services:
+  ollama_gpu:
+    image: ollama/ollama:latest
+    container_name: Ollama_GPU
+    ports:
+      - "22545:11434"
+    volumes:
+      - ollama-gpu:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: ["gpu"]
+              count: all
+    restart: unless-stopped
+
+  ollama_cpu:
+    image: ollama/ollama:latest
+    container_name: Ollama_CPU
+    ports:
+      - "22546:11434"
+    volumes:
+      - ollama-cpu:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    restart: unless-stopped
+
+volumes:
+  ollama-gpu:
+  ollama-cpu:
+
+
