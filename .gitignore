@@ -1,2 +1,9 @@
 /.idea
 /.venv
+
+# Analysis output directories
+/Report/
+/Results/Laptop_Data/plots/
+/Results/Laptop_Data/plots_Machine_A/
+/Results/Workstation_Data/plots/
+/Results/Workstation_Data/plots_Machine_B/
