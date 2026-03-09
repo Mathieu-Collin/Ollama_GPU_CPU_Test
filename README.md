@@ -28,8 +28,10 @@ Ollama_GPU_CPU_Test/
 ├── Results/
 │   ├── Laptop_Data/
 │   │   └── results.csv             # Performance data from laptop (less powerful GPU)
-│   └── Workstation_Data/
-│       └── results.csv             # Performance data from workstation (more powerful GPU)
+│   ├── Workstation_Data/
+│   │   └── results.csv             # Performance data from workstation (more powerful GPU)
+│   └── Powerfull_workstation_data/
+│       └── results.csv             # Performance data from powerful workstation (most powerful GPU)
 └── Report/                          # Generated analysis outputs
     ├── Step_5_Correlation_Analysis/
     ├── Step_6_Performance_Visualizations/
@@ -81,6 +83,11 @@ llama3.2:3b,gpu,10,1,0.892
 - **Data Location**: `Results/Workstation_Data/results.csv`
 - **Use Case**: Represents production or research environment
 
+#### Powerful Workstation (Machine C)
+- **Purpose**: Top-tier configuration with the most powerful GPU
+- **Data Location**: `Results/Powerfull_workstation_data/results.csv`
+- **Use Case**: Represents high-end research or enterprise environment
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -99,6 +106,7 @@ pip install pandas matplotlib seaborn numpy scipy scikit-learn jupyter
    ```bash
    ls Results/Laptop_Data/results.csv
    ls Results/Workstation_Data/results.csv
+   ls Results/Powerfull_workstation_data/results.csv
    ```
 
 2. **Open the analysis notebook:**
@@ -109,6 +117,23 @@ pip install pandas matplotlib seaborn numpy scipy scikit-learn jupyter
 3. **Run all cells** to generate the complete analysis
 
 4. **Review results** in the `Report/` directory
+
+### Starting Docker Containers
+
+Two compose files are provided depending on your GPU vendor:
+
+**NVIDIA GPU:**
+```bash
+docker compose -f compose.nvidia.yaml up -d
+```
+
+**AMD GPU (ROCm):**
+```bash
+docker compose -f compose.amd.yaml up -d
+```
+
+> ⚠️ For AMD, make sure the `rocm` drivers are installed on your host and that
+> your GPU is [supported by ROCm](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html).
 
 ### Collecting New Data
 
